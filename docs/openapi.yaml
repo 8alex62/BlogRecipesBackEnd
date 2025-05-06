@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Your API Title
+  version: v1
+servers:
+  - url: http://localhost:8090/ # Replace with your actual base URL
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Category:
+      $ref: './models/category.yaml#/components/schemas/Category'
+    Comment:
+      $ref: './models/comment.yaml#/components/schemas/Comment'
+    Ingredient:
+      $ref: './models/ingredient.yaml#/components/schemas/Ingredient'
+    IngredientRecipe:
+      $ref: './models/ingredientRecipe.yaml#/components/schemas/IngredientRecipe'
+    Member:
+      $ref: './models/member.yaml#/components/schemas/Member'
+    Recipe:
+      $ref: './models/recipe.yaml#/components/schemas/Recipe'
+    UserAuth:
+      $ref: './models/userAuth.yaml#/components/schemas/UserAuth'
+    Error:
+      $ref: './components/schemas/error.yaml#/components/schemas/Error'
+    LoginRequest:
+      $ref: './components/schemas/loginRequest.yaml#/components/schemas/LoginRequest'
+    LoginResponse:
+      $ref: './components/schemas/loginResponse.yaml#/components/schemas/LoginResponse'
+security:
+  - bearerAuth: []
+paths:
+  /Category:
+    $ref: './routes/categoryRoutes.yaml#/paths/~1Category'
+  /Category/{id}:
+    $ref: './routes/categoryRoutes.yaml#/paths/~1Category~1{id}'
+  /Comment:
+    $ref: './routes/commentRoutes.yaml#/paths/~1Comment'
+  /Comment/{id}:
+    $ref: './routes/commentRoutes.yaml#/paths/~1Comment~1{id}'
+  /Comment/Recipe/{id}:
+    $ref: './routes/commentRoutes.yaml#/paths/~1Comment~1Recipe~1{id}'
+  /Ingredient:
+    $ref: './routes/ingredientRoutes.yaml#/paths/~1Ingredient'
+  /Ingredient/{id}:
+    $ref: './routes/ingredientRoutes.yaml#/paths/~1Ingredient~1{id}'
+  /IngredientRecipe:
+    $ref: './routes/ingredientRecipeRoutes.yaml#/paths/~1IngredientRecipe'
+  /Member:
+    $ref: './routes/memberRoutes.yaml#/paths/~1Member'
+  /Member/{id}:
+    $ref: './routes/memberRoutes.yaml#/paths/~1Member~1{id}'
+  /auth/register:
+    $ref: './routes/userAuthRoutes.yaml#/paths/~1auth~1register'
+  /auth/login:
+    $ref: './routes/userAuthRoutes.yaml#/paths/~1auth~1login'
+  /Recipe:
+    $ref: './routes/recipeRoutes.yaml#/paths/~1Recipe'
+  /Recipe/{id}:
+    $ref: './routes/recipeRoutes.yaml#/paths/~1Recipe~1{id}'
+  /Recipe/Category/{id}:
+    $ref: './routes/recipeRoutes.yaml#/paths/~1Recipe~1Category~1{id}'

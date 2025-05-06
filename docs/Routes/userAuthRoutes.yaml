@@ -1,0 +1,52 @@
+paths
+  authregister
+    post
+      summary Register a new user
+      requestBody
+        required true
+        content
+          applicationjson
+            schema
+              $ref '#componentsschemasUserAuth'
+      responses
+        '201'
+          description Successful user registration
+          content
+            applicationjson
+              schema
+                type object
+                properties
+                  status
+                    type integer
+                    example 201
+                  data
+                    $ref '#componentsschemasUserAuth'
+                  message
+                    type string
+                    example Succesfully User auth Created
+        '400'
+          $ref '#componentsschemasError'
+  authlogin
+    post
+      summary User login
+      requestBody
+        required true
+        content
+          applicationjson
+            schema
+              $ref '#componentsschemasLoginRequest'
+      responses
+        '200'
+          description Successful login
+          content
+            applicationjson
+              schema
+                $ref '#componentsschemasLoginResponse'
+        '401'
+          description Authentication failed
+          content
+            applicationjson
+              schema
+                $ref '#componentsschemasError'
+        '400'
+          $ref '#componentsschemasError'

@@ -1,0 +1,138 @@
+paths:
+  /Ingredient:
+    get:
+      summary: Get all ingredients
+      responses:
+        '200':
+          description: Successful retrieval of ingredients list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ingredient'
+                  message:
+                    type: string
+                    example: "Sucessfully retrieved the Ingredients list"
+        '400':
+          $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new ingredient
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        '200':
+          description: Successful creation of ingredient
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Ingredient'
+                  message:
+                    type: string
+                    example: "Sucessfully created the Ingredient"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Ingredient/{id}:
+    get:
+      summary: Get an ingredient by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the ingredient to retrieve
+      responses:
+        '200':
+          description: Successful retrieval of ingredient
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Ingredient'
+                  message:
+                    type: string
+                    example: "Sucessfully retrived the Ingredient"
+        '400':
+          $ref: '#/components/schemas/Error'
+    put:
+      summary: Update an ingredient by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the ingredient to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ingredient'
+      responses:
+        '200':
+          description: Successful update of ingredient
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Ingredient'
+                  message:
+                    type: string
+                    example: "Sucessfully updated the Ingredient"
+        '400':
+          $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete an ingredient by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the ingredient to delete
+      responses:
+        '200':
+          description: Successful deletion of ingredient
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Ingredient'
+                  message:
+                    type: string
+                    example: "Sucessfully deleted the Ingredient"
+        '400':
+          $ref: '#/components/schemas/Error'

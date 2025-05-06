@@ -1,0 +1,207 @@
+# routes/memberRoutes.yaml
+paths:
+  /Member:
+    get:
+      summary: Get member by email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: The email address of the member to retrieve
+                  example: "alice.smith@example.com"
+              required:
+                - email
+      responses:
+        '200':
+          description: Successful retrieval of member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Member'
+          message:
+            type: string
+            example: "Succesfully Member Retrieved"
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: "Member not found"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Member/all:
+    get:
+      summary: Get all members
+      responses:
+        '200':
+          description: Successful retrieval of members list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Member'
+                  message:
+                    type: string
+                    example: "Succesfully Members Retrieved"
+        '400':
+          $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: Successful creation of member
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Member'
+                  message:
+                    type: string
+                    example: "Succesfully Member Created"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Member/{id}:
+    get:
+      summary: Get a member by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the member to retrieve
+      responses:
+        '200':
+          description: Successful retrieval of member
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Member'
+                  message:
+                    type: string
+                    example: "Succesfully Member Retrieved"
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: "Member not found"
+        '400':
+          $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a member by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the member to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Member'
+      responses:
+        '200':
+          description: Successful update of member
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Member'
+                  message:
+                    type: string
+                    example: "Succesfully Member Updated"
+        '400':
+          $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a member by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the member to delete
+      responses:
+        '200':
+          description: Successful deletion of member
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Member'
+                  message:
+                    type: string
+                    example: "Succesfully Member Deleted"
+        '404':
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 404
+                  message:
+                    type: string
+                    example: "Member not found"
+        '400':
+          $ref: '#/components/schemas/Error'

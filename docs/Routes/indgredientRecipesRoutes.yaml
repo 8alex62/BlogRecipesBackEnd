@@ -1,0 +1,28 @@
+paths:
+  /IngredientRecipe:
+    post:
+      summary: Add an ingredient to a recipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IngredientRecipe'
+      responses:
+        '200':
+          description: Successful addition of ingredient to recipe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/IngredientRecipe'
+                  message:
+                    type: string
+                    example: "Sucessfully added the Ingredient to the Recipe."
+        '400':
+          $ref: '#/components/schemas/Error'

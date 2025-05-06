@@ -1,0 +1,34 @@
+components:
+  schemas:
+    Member:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the member
+          example: "64369b27e879056a8d3c8e61"
+        firstName:
+          type: string
+          description: The first name of the member
+          example: "Alice"
+        lastName:
+          type: string
+          description: The last name of the member
+          example: "Smith"
+        email:
+          type: string
+          format: email
+          description: The email address of the member
+          example: "alice.smith@example.com"
+        password:
+          type: string
+          description: The password of the member (write-only)
+        registrationDate:
+          type: string
+          format: date-time
+          description: The date and time the member registered
+      required:
+        - firstName
+        - lastName
+        - email
+        - password

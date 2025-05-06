@@ -1,0 +1,168 @@
+paths:
+  /Recipe:
+    get:
+      summary: Get all recipes
+      responses:
+        '200':
+          description: Successful retrieval of recipes list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+                  message:
+                    type: string
+                    example: "Succesfully retrived the list of Recipes"
+        '400':
+          $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new recipe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+      responses:
+        '200':
+          description: Successful creation of recipe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Recipe'
+                  message:
+                    type: string
+                    example: "Succesfully created the Recipe"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Recipe/{id}:
+    get:
+      summary: Get a recipe by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the recipe to retrieve
+      responses:
+        '200':
+          description: Successful retrieval of recipe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Recipe'
+                  message:
+                    type: string
+                    example: "Succesfully retrieved the Recipe"
+        '400':
+          $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a recipe by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the recipe to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Recipe'
+      responses:
+        '200':
+          description: Successful update of recipe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Recipe'
+                  message:
+                    type: string
+                    example: "Succesfully updated the Recipe"
+        '400':
+          $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a recipe by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the recipe to delete
+      responses:
+        '200':
+          description: Successful deletion of recipe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Recipe'
+                  message:
+                    type: string
+                    example: "Succesfully deleted the Recipe"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Recipe/Category/{id}:
+    get:
+      summary: Get recipes by category ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the category to retrieve recipes for
+      responses:
+        '200':
+          description: Successful retrieval of recipes for the category
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Recipe'
+                  message:
+                    type: string
+                    example: "Succesfully retrieved the Recipe"
+        '400':
+          $ref: '#/components/schemas/Error'

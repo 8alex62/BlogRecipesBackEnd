@@ -1,0 +1,168 @@
+paths:
+  /Comment:
+    get:
+      summary: Get all comments
+      responses:
+        '200':
+          description: Successful retrieval of comments list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+                  message:
+                    type: string
+                    example: "Sucessfully retrieved the Comments list"
+        '400':
+          $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Successful creation of comment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Comment'
+                  message:
+                    type: string
+                    example: "Sucessfully created the Comment"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Comment/{id}:
+    get:
+      summary: Get a comment by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the comment to retrieve
+      responses:
+        '200':
+          description: Successful retrieval of comment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Comment'
+                  message:
+                    type: string
+                    example: "Sucessfully retrived the Comment"
+        '400':
+          $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a comment by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the comment to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+      responses:
+        '200':
+          description: Successful update of comment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Comment'
+                  message:
+                    type: string
+                    example: "Sucessfully updated the Comment"
+        '400':
+          $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a comment by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the comment to delete
+      responses:
+        '200':
+          description: Successful deletion of comment
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Comment'
+                  message:
+                    type: string
+                    example: "Sucessfully deleted the Comment"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Comment/Recipe/{id}:
+    get:
+      summary: Get comments by recipe ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the recipe to retrieve comments for
+      responses:
+        '200':
+          description: Successful retrieval of comments for the recipe
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+                  message:
+                    type: string
+                    example: "Sucessfully retrieved the Comments list"
+        '400':
+          $ref: '#/components/schemas/Error'

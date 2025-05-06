@@ -1,0 +1,138 @@
+paths:
+  /Category:
+    get:
+      summary: Get all categories
+      responses:
+        '200':
+          description: Successful retrieval of category list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Category'
+                  message:
+                    type: string
+                    example: "Sucessfully Category retrived list"
+        '400':
+          $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new category
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Successful creation of category
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Category'
+                  message:
+                    type: string
+                    example: "Sucessfully created the Category"
+        '400':
+          $ref: '#/components/schemas/Error'
+  /Category/{id}:
+    get:
+      summary: Get a category by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the category to retrieve
+      responses:
+        '200':
+          description: Successful retrieval of category
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Category'
+                  message:
+                    type: string
+                    example: "Sucessfully retrived the Category"
+        '400':
+          $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a category by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the category to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      responses:
+        '200':
+          description: Successful update of category
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Category'
+                  message:
+                    type: string
+                    example: "Sucessfully updated the Category"
+        '400':
+          $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a category by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID of the category to delete
+      responses:
+        '200':
+          description: Successful deletion of category
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: integer
+                    example: 200
+                  data:
+                    $ref: '#/components/schemas/Category'
+                  message:
+                    type: string
+                    example: "Sucessfully deleted the Category"
+        '400':
+          $ref: '#/components/schemas/Error'

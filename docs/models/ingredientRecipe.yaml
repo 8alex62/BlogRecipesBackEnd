@@ -1,0 +1,30 @@
+components:
+  schemas:
+    IngredientRecipe:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the ingredient-recipe association
+          example: "64369b27e879056a8d3c8d51"
+        unit:
+          type: number
+          description: The unit of the ingredient (e.g., grams, ml)
+          example: 200
+        quantity:
+          type: number
+          description: The quantity of the ingredient
+          example: 1
+        Recipe:
+          type: string
+          description: The ID of the associated recipe
+          example: "64369b27e879056a8d3c8b55"
+        Ingredient:
+          type: string
+          description: The ID of the associated ingredient
+          example: "64369b27e879056a8d3c8d41"
+      required:
+        - unit
+        - quantity
+        - Recipe
+        - Ingredient

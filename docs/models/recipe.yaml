@@ -1,0 +1,39 @@
+components:
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the recipe
+          example: "64369b27e879056a8d3c8b55"
+        title:
+          type: string
+          description: The title of the recipe
+          example: "Delicious Pasta"
+        description:
+          type: string
+          description: A brief description of the recipe
+          example: "A classic Italian pasta dish."
+        picture:
+          type: string
+          description: URL of the recipe picture
+          example: "https://example.com/pasta.jpg"
+        creationDate:
+          type: string
+          format: date-time
+          description: The date and time the recipe was created
+        Category:
+          type: string
+          description: The ID of the associated category
+          example: "64369b27e879056a8d3c8b21"
+        Member:
+          type: string
+          description: The ID of the member who created the recipe
+          example: "64369b27e879056a8d3c8e61"
+      required:
+        - title
+        - description
+        - picture
+        - Category
+        - Member
