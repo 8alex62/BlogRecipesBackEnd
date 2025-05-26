@@ -10,6 +10,7 @@ const ingredientRoutes = require("./routes/ingredientRoutes");
 const ingredientRecipeRoutes = require("./routes/ingredientRecipeRoutes");
 const userAuthRoutes = require("./routes/userAuthRoutes");
 const verifyToken = require('./middlewares/authMiddlewares');
+const cors = require('cors');
 
 dotenv.config();
 
@@ -20,6 +21,9 @@ mongoose.connect(process.env.MONGO_CONNECTION)
     .then(() => console.log("Connexion à MongoDB a réussie"))
     .catch((error) => console.log("Connexion à MongoDB a échouée : " + error));
 
+app.use(cors({
+  origin: '*'
+}));
 
 // parse pour le json
 app.use(bodyParser.json());

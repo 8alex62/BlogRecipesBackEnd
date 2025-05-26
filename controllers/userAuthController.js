@@ -5,16 +5,18 @@ const jwt = require('jsonwebtoken');
 
 module.exports.login = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        let userAuth = await userAuthService.getUser({ username: username });
+        const email = req.body.email;
+        const password = req.body.password;
+        let userAuth = await userAuthService.getUser({ email: email });
         if (!userAuth)
         {
-            return res.status(401).json({ error: 'Authentication failed' });
+            console.log("Something bad happened " + req.body.email);
+            return res.status(401).json({ error: 'Authentication failed username' });
         }
         const passwordMatch = await bcrypt.compare(password, userAuth.password);
         if (!passwordMatch)
         {
-            return res.status(401).json({ error: 'Authentication failed' });
+            return res.status(401).json({ error: 'Authentication failed password failed' });
         }
         // crée et retourne le token
         const token = jwt.sign({ userId: userAuth._id }, process.env.JWT_SECRET, {

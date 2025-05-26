@@ -1,12 +1,13 @@
-const UserAuth = require("../models/userAuth");
+const Member = require("../models/member");
 // récupère un user
 module.exports.getUser = async (query) => {
     try {
-        let user = await UserAuth.findOne(query);
+        let user = await Member.findOne(query);
+        console.log("User found : " + user);
         return user;
     }
     catch(e) {
-        throw Error("Error while query all one user : " + e);
+        throw Error("Error while query the user : " + e);
     }
 }
 // crée un user
