@@ -47,7 +47,7 @@ module.exports.login = async (req, res) => {
         }
         // crée et retourne le token
         const token = jwt.sign({ memberId: member._id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
-        return res.status(200).json({ token });
+        return res.status(200).json({ token, member });
     }
     catch(e) {
         return res.status(400).json({ status: 400, message: e.message });
@@ -64,7 +64,7 @@ module.exports.createMember = async (req, res) => {
 
         await memberService.createMember(member);
         const token = jwt.sign({ memberId: member._id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
-        return res.status(200).json({ token });
+        return res.status(200).json({ token, member });
     }
     catch(e) {
         return res.status(400).json({ status: 400, message: e.message });
