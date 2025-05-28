@@ -1,6 +1,7 @@
 const memberService = require("../services/memberService");
 const Member = require("../models/member");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 module.exports.getAllMembers = async (req, res) => {
     try {
@@ -28,17 +29,25 @@ module.exports.getMember = async (req, res) => {
     }
 };
 
-module.exports.getMemberMail = async (req, res) => {
+module.exports.login = async (req, res) => {
     try {
-        
+        const password = req.body.password;
         let member = await memberService.getMember({ email: req.body.email });
 
-
-        if (member == null) {
-            return res.status(404).json({ status: 404, message: "Member not found" });
+        if (!member)
+        {
+            console.log("Something bad happened " + req.body.email);
+            return res.status(401).json({ error: 'Authentication failed username' });
         }
+        const passwordMatch = await bcrypt.compare(password, member.password);
 
-        return res.status(200).json({ status: 200, data: member, message: "Succesfully Member Retrieved" });
+        if (!passwordMatch)
+        {
+            return res.status(401).json({ error: 'Authentication failed password failed' });
+        }
+        // crée et retourne le token
+        const token = jwt.sign({ memberId: member._id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
+        return res.status(200).json({ token });
     }
     catch(e) {
         return res.status(400).json({ status: 400, message: e.message });
@@ -53,8 +62,9 @@ module.exports.createMember = async (req, res) => {
         req.body.password = await bcrypt.hash(req.body.password, salt);
         let member = new Member(req.body);
 
-        let newMember = await memberService.createMember(member);
-        return res.status(200).json({ status: 200, data: newMemberer, message: "Succesfully Member Created" });
+        await memberService.createMember(member);
+        const token = jwt.sign({ memberId: member._id }, process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRATION});
+        return res.status(200).json({ token });
     }
     catch(e) {
         return res.status(400).json({ status: 400, message: e.message });

@@ -8,7 +8,6 @@ const commentRoutes = require("./routes/commentRoutes");
 const recipeRoutes = require("./routes/recipeRoutes");
 const ingredientRoutes = require("./routes/ingredientRoutes");
 const ingredientRecipeRoutes = require("./routes/ingredientRecipeRoutes");
-const userAuthRoutes = require("./routes/userAuthRoutes");
 const verifyToken = require('./middlewares/authMiddlewares');
 const cors = require('cors');
 
@@ -27,9 +26,6 @@ app.use(cors({
 
 // parse pour le json
 app.use(bodyParser.json());
-
-// routes pour l'authentification
-app.use("/auth", userAuthRoutes);
 
 // routes protégées
 app.use('/api', verifyToken);
